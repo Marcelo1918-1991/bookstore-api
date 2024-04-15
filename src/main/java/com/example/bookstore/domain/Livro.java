@@ -3,26 +3,23 @@ package com.example.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Livro implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
-	private String nomeAutor; 
+	private String autor; 
 	private String texto; 
 	
 	@ManyToOne
@@ -31,16 +28,14 @@ public class Livro implements Serializable{
 
 	public Livro() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Livro(Integer id, String titulo, String nomeAutor, String texto, Categoria categoria) {
+	public Livro(Integer id, String titulo, String autor, String texto, Categoria categoria) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
-		this.nomeAutor = nomeAutor;
 		this.texto = texto;
-		this.categoria = categoria;
+		this.categoria = categoria; 
 	}
 
 	public Integer getId() {
@@ -59,12 +54,12 @@ public class Livro implements Serializable{
 		this.titulo = titulo;
 	}
 
-	public String getNomeAutor() {
-		return nomeAutor;
+	public String getAutor() {
+		return autor;
 	}
 
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 	public String getTexto() {
@@ -85,7 +80,10 @@ public class Livro implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1; 
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
