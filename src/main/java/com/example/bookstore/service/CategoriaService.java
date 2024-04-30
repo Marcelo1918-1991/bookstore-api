@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.stereotype.Service;
 
 import com.example.bookstore.domain.Categoria;
@@ -38,6 +39,12 @@ public class CategoriaService {
 		obj.setNome(objDto.getNome());
 		obj.setDescricao(objDto.getDescricao());
 		return categoriaRepository.save(obj);
+	}
+
+	public void deletarCategoriaPorId(Integer id) throws ObjectNotFoundException {
+		pegarPorId(id);
+		categoriaRepository.deleteById(id);
+		
 	}
 	
 	
