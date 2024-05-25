@@ -1,11 +1,21 @@
 package com.example.bookstore.dtos;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.example.bookstore.domain.Categoria;
 
 public class CategoriaDTO {
 
 	private Integer id;
+	
+	@Length(min = 3, max = 100, message = "O campo NOME deve ter entre 3 e 100 caracteres")
+	@NotEmpty(message = "Campo NOME é obrigatório!")
 	private String nome;
+	
+	@Length(min = 3, max = 200, message = "O campo DESCRIÇÃO deve ter entre 3 e 100 caracteres")
+	@NotEmpty(message = "Campo DESCRIÇÃO é obrigatório!")
 	private String descricao;
 	
 	public CategoriaDTO() {

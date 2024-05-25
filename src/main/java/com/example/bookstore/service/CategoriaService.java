@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.stereotype.Service;
 
 import com.example.bookstore.domain.Categoria;
 import com.example.bookstore.dtos.CategoriaDTO;
 import com.example.bookstore.repositories.CategoriaRepository;
+import com.example.bookstore.service.exceptions.DataIntegrityViolationException;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -43,10 +43,14 @@ public class CategoriaService {
 
 	public void deletarCategoriaPorId(Integer id) throws ObjectNotFoundException {
 		pegarPorId(id);
-		categoriaRepository.deleteById(id);
-		
+		try {
+			categoriaRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+
+			throw new DataIntegrityViolationException("Objeto não pode ser deletado! Possui livros associados");
+
+		}
+
 	}
-	
-	
-	
+
 }
